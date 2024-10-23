@@ -1,0 +1,9 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="docenteForm">
+    <div>
+      <label for="nombre">Nombre del Docente:</label>
+      <input id="nombre" type="text" formControlName="nombre" />
+    </div>
+  
+    <button type="submit">Guardar</button>
+  </form>
+  

@@ -1,0 +1,14 @@
+<form (ngSubmit)="onSubmit()" [formGroup]="alumnoForm">
+    <div>
+      <label for="nombre">Nombre del Alumno:</label>
+      <input id="nombre" type="text" formControlName="nombre" />
+    </div>
+  
+    <div>
+      <label for="fechaNacimiento">Fecha de nacimiento:</label>
+      <input id="fechaNacimiento" type="date" formControlName="fechaNacimiento" />
+    </div>
+  
+    <button type="submit">Guardar</button>
+  </form>
+  

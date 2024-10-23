@@ -1,12 +1,55 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AlumnoService } from '../../services/alumno.service';
+import { Alumno } from '../../model/alumno.model';
+import { CommonModule} from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-alumno-list',
   standalone: true,
-  imports: [],
   templateUrl: './alumno-list.component.html',
-  styleUrl: './alumno-list.component.css'
+  styleUrls: ['./alumno-list.component.css'],
+  imports: [CommonModule]
 })
-export class AlumnoListComponent {
+export class AlumnoListComponent implements OnInit {
+
+  alumnos?: Alumno[];
+
+  constructor(private alumnoService: AlumnoService,private router: Router) { }
+
+  ngOnInit(): void {
+    this.obtenerTodosLosAlumnos();
+  }
+
+  private obtenerTodosLosAlumnos() {
+    this.alumnoService.obtenerTodosLosAlumnos().subscribe(data => {
+      this.alumnos = data;
+    });
+  }
+
+  // Eliminar alumno
+  eliminarAlumno(id: number) {
+    this.alumnoService.eliminarAlumno(id).subscribe(
+      () => {
+      console.log('Alumno eliminado con éxito');
+      this.obtenerTodosLosAlumnos(); // Recargar la lista después de eliminar
+      },
+      error => {
+        if (error.status === 500) {
+          console.log('No fue posible eliminar el alumno porque está asignado a un curso.')     
+        } else {
+          console.log('Error al intentar eliminar el alumno.')
+      }
+    });
+  }
+
+  navegarAFormularioAgregar() {
+    this.router.navigate(['/agregar-alumno']);
+  }
+
+  // Navegar al formulario para editar un alumno
+  navegarAFormularioEditar(id: number) {
+    this.router.navigate(['/editar-alumno', id]);
+  }
 
 }

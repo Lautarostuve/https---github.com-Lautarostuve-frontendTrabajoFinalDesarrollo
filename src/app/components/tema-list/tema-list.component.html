@@ -1,1 +1,29 @@
-<p>tema-list works!</p>
+<div class="container">
+    <h2>Lista de Temas</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Descripción</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tema of temas">
+          <td>{{ tema.id }}</td>
+          <td>{{ tema.nombre }}</td>
+          <td>{{ tema.descripcion }}</td>
+          <td>
+            <button (click)="eliminarTema(tema.id)" class="btn btn-danger">Eliminar</button>
+          </td>
+          <td>
+            <button (click)="navegarAFormularioEditar(tema.id)">Editar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button (click)="navegarAFormularioAgregar()">Agregar Tema</button>
+
+  </div>
+  
