@@ -3,17 +3,20 @@ import { DocenteService } from '../../services/docente.service';
 import { Docente } from '../../model/docente.model';
 import { CommonModule} from '@angular/common';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-docente-list',
   standalone: true,
   templateUrl: './docente-list.component.html',
   styleUrls: ['./docente-list.component.css'],
-  imports: [CommonModule]
+  imports: [CommonModule,FormsModule]
 })
 export class DocenteListComponent implements OnInit {
 
   docentes?: Docente[];
+  alumnos: string[] = [];  // Lista de alumnos obtenidos por docente
+  legajoDocente: number = 0;  // Legajo del docente para la búsqueda
 
   constructor(private docenteService: DocenteService,private router: Router) { }
 
@@ -25,6 +28,19 @@ export class DocenteListComponent implements OnInit {
     this.docenteService.obtenerTodosLosDocentes().subscribe(data => {
       this.docentes = data;
     });
+  }
+
+
+  // Buscar alumnos por legajo de docente
+  buscarAlumnosPorDocente() {
+    this.docenteService.obtenerAlumnosPorDocente(this.legajoDocente).subscribe(
+      data => {
+        this.alumnos = data ?? [];
+      },
+      error => {
+        console.log('Error al obtener los alumnos del docente.');
+      }
+    );
   }
 
   // Eliminar docente

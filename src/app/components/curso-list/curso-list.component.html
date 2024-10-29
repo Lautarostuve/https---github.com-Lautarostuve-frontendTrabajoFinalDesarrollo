@@ -39,5 +39,46 @@
     </tbody>
   </table>
   <button (click)="navegarAFormularioAgregar()" class="btn btn-primary">Agregar Curso</button>
+  <!-- Botón para volver a mostrar todos los cursos -->
+  <button (click)="obtenerTodosLosCursos()" [ngClass]="{'btn-secondary': !busquedaRealizada, 'btn-primary': busquedaRealizada}" class="btn">Mostrar todos los Cursos</button>
+  
 </div>
 
+
+<!-- Formulario de búsqueda de cursos por profesor y fecha -->
+<div class="container mt-4">
+  <h3>Buscar Cursos por Profesor y Fecha</h3>
+  <form [formGroup]="buscarForm" (ngSubmit)="buscarCursosPorProfesor()">
+    <div class="form-row align-items-end">
+      <!-- Campo Legajo del Profesor -->
+      <div class="col-md-2">
+        <label for="legajoProfesor">Legajo del Profesor</label>
+        <input
+          type="number"
+          id="legajoProfesor"
+          class="form-control"
+          formControlName="legajo"
+          placeholder="Legajo"
+          [ngClass]="{ 'is-invalid': buscarForm.get('legajo')?.invalid && buscarForm.get('legajo')?.touched }"
+          min = "0"
+          required
+        >
+        <!-- Mensaje de error si el número es negativo -->
+        <div class="text-danger" *ngIf="buscarForm.get('legajo')?.hasError('min') && buscarForm.get('legajo')?.touched">
+          El legajo no puede ser negativo.
+        </div>
+      </div>
+
+      <!-- Campo Fecha -->
+      <div class="col-md-2">
+        <label for="fecha">Fecha</label>
+        <input type="date" id="fecha" class="form-control" formControlName="fecha" required>
+      </div>
+
+      <!-- Botón de búsqueda -->
+      <div class="col-md-auto">
+        <button type="submit" class="btn btn-primary mt-3" [disabled]="buscarForm.invalid">Buscar</button>
+      </div>
+    </div>
+  </form>
+</div>

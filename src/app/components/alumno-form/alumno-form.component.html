@@ -1,14 +1,59 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="alumnoForm">
-    <div>
-      <label for="nombre">Nombre del Alumno:</label>
-      <input id="nombre" type="text" formControlName="nombre" />
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <form [formGroup]="alumnoForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+          <label for="nombre">Nombre del Alumno:</label>
+          <input 
+            id="nombre" 
+            type="text" 
+            formControlName="nombre" 
+            class="form-control" 
+            placeholder="Cristiano Ronaldo dos Santos Aveiro"
+            [ngClass]="{ 'is-invalid': alumnoForm.get('nombre')?.invalid && alumnoForm.get('nombre')?.touched }" 
+            maxlength="50"
+            required
+          />
+
+
+          <!-- Mensaje de error si el nombre excede los 50 caracteres -->
+          <small class="text-danger" *ngIf="alumnoForm.get('nombre')?.hasError('maxlength') && alumnoForm.get('nombre')?.touched">
+            El nombre no puede exceder los 50 caracteres.
+          </small>
+          <small class="text-danger" *ngIf="alumnoForm.get('nombre')?.hasError('required') && alumnoForm.get('nombre')?.touched">
+            El nombre es requerido.
+          </small>
+
+        </div>
+      
+        <div class="form-group">
+          <div class="col-md-4">
+            <label for="fechaNacimiento">Fecha de nacimiento:</label>
+            <input 
+              id="fechaNacimiento" 
+              type="date" 
+              formControlName="fechaNacimiento" 
+              class="form-control" 
+              [ngClass]="{ 'is-invalid': alumnoForm.get('fechaNacimiento')?.invalid && alumnoForm.get('fechaNacimiento')?.touched }" 
+              [max]="maxDate"
+              required
+            />
+          </div>
+
+          <small class="text-danger" *ngIf="alumnoForm.get('fechaNacimiento')?.hasError('maxDate') && alumnoForm.get('fechaNacimiento')?.touched">
+            Fecha erronea
+          </small>
+          <small class="text-danger" *ngIf="alumnoForm.get('fechaNacimiento')?.hasError('required') && alumnoForm.get('fechaNacimiento')?.touched">
+            Fecha requerida
+          </small>
+
+        </div>
+      
+        <div class= "text-center mt-4">
+          <button type="submit" [ngClass]="{'btn-secondary': alumnoForm.invalid, 'btn-primary': alumnoForm}" class="btn">Guardar</button>
+        </div>
+      </form>
     </div>
-  
-    <div>
-      <label for="fechaNacimiento">Fecha de nacimiento:</label>
-      <input id="fechaNacimiento" type="date" formControlName="fechaNacimiento" />
-    </div>
-  
-    <button type="submit">Guardar</button>
-  </form>
-  
+  </div>
+</div>

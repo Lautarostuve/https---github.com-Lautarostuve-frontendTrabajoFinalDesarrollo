@@ -1,14 +1,56 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="temaForm">
-    <div>
-      <label for="nombre">Nombre del Tema:</label>
-      <input id="nombre" type="text" formControlName="nombre" />
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <form [formGroup]="temaForm" (ngSubmit)="onSubmit()">
+
+        <!-- Campo Nombre del Tema -->
+        <div class="form-group">
+          <label for="nombre">Nombre del Tema:</label>
+          <input 
+            id="nombre" 
+            type="text" 
+            formControlName="nombre" 
+            class="form-control" 
+            placeholder="Algebra y Geometria Analitica"
+            [ngClass]="{ 'is-invalid': temaForm.get('nombre')?.invalid && temaForm.get('nombre')?.touched }" 
+            maxlength="50"
+            required
+          />
+          <!-- Mensaje de error si el nombre excede los 50 caracteres -->
+          <small class="text-danger" *ngIf="temaForm.get('nombre')?.hasError('maxlength') && temaForm.get('nombre')?.touched">
+            El nombre no puede exceder los 50 caracteres.
+          </small>
+          <small class="text-danger" *ngIf="temaForm.get('nombre')?.hasError('required') && temaForm.get('nombre')?.touched">
+            El nombre es requerido.
+          </small>
+        </div>
+        
+        <!-- Campo Descripción -->
+        <div class="form-group mt-3">
+          <label for="descripcion">Descripción:</label>
+          <input 
+            id="descripcion" 
+            type="text" 
+            formControlName="descripcion" 
+            class="form-control" 
+            placeholder="Algebra de primer año en la UTN"
+            [ngClass]="{ 'is-invalid': temaForm.get('descripcion')?.invalid && temaForm.get('descripcion')?.touched }" 
+            maxlength="50"
+          />
+          <!-- Mensaje de error si la descripción excede los 50 caracteres -->
+          <small class="text-danger" *ngIf="temaForm.get('descripcion')?.hasError('maxlength') && temaForm.get('descripcion')?.touched">
+            La descripción no puede exceder los 50 caracteres.
+          </small>
+          <small class="text-danger" *ngIf="temaForm.get('descripcion')?.hasError('required') && temaForm.get('descripcion')?.touched">
+            La descripción es requerida.
+          </small>
+        </div>
+
+        <!-- Botón Guardar -->
+        <div class="text-center mt-4">
+          <button type="submit" [ngClass]="{'btn-secondary': temaForm.invalid, 'btn-primary': temaForm}" class="btn">Guardar</button>
+        </div>
+      </form>
     </div>
-  
-    <div>
-      <label for="descripcion">Descripción:</label>
-      <input id="descripcion" type="text" formControlName="descripcion" />
-    </div>
-  
-    <button type="submit">Guardar</button>
-  </form>
-  
+  </div>
+</div>

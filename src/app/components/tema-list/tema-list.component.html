@@ -16,14 +16,17 @@
           <td>{{ tema.descripcion }}</td>
           <td>
             <button (click)="eliminarTema(tema.id)" class="btn btn-danger">Eliminar</button>
-          </td>
-          <td>
-            <button (click)="navegarAFormularioEditar(tema.id)">Editar</button>
+            <button (click)="navegarAFormularioEditar(tema.id)" class="btn btn-primary">Editar</button>
           </td>
         </tr>
       </tbody>
     </table>
-    <button (click)="navegarAFormularioAgregar()">Agregar Tema</button>
+      <!-- Mensaje de error en rojo -->
+    <div *ngIf="mensajeError" class="alert alert-danger">
+      {{ mensajeError }}
+    </div>
+    
+    <button (click)="navegarAFormularioAgregar()" class="btn btn-primary">Agregar Tema</button>
 
   </div>
   

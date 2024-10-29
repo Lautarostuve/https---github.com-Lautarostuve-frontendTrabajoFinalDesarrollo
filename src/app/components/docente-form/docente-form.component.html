@@ -1,9 +1,37 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="docenteForm">
-    <div>
-      <label for="nombre">Nombre del Docente:</label>
-      <input id="nombre" type="text" formControlName="nombre" />
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-5">
+      <form [formGroup]="docenteForm" (ngSubmit)="onSubmit()">
+
+        <div class="form-group">
+          <label for="nombre">Nombre del docente:</label>
+          <input 
+            id="nombre" 
+            type="text" 
+            formControlName="nombre" 
+            class="form-control" 
+            placeholder="Cristiano Ronaldo dos Santos Aveiro"
+            [ngClass]="{ 'is-invalid': docenteForm.get('nombre')?.invalid && docenteForm.get('nombre')?.touched }" 
+            maxlength="50"
+            required
+          />
+
+
+          <!-- Mensaje de error si el nombre excede los 50 caracteres -->
+          <small class="text-danger" *ngIf="docenteForm.get('nombre')?.hasError('maxlength') && docenteForm.get('nombre')?.touched">
+            El nombre no puede exceder los 50 caracteres.
+          </small>
+          <small class="text-danger" *ngIf="docenteForm.get('nombre')?.hasError('required') && docenteForm.get('nombre')?.touched">
+            El nombre es requerido.
+          </small>
+
+        </div>
+      
+        <div class= "text-center mt-4">
+          <button type="submit" [ngClass]="{'btn-secondary': docenteForm.invalid, 'btn-primary': docenteForm}" class="btn">Guardar</button>
+        </div>
+      </form>
     </div>
-  
-    <button type="submit">Guardar</button>
-  </form>
+  </div>
+</div>
   

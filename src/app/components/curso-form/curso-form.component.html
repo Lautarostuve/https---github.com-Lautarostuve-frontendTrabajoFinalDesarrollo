@@ -1,60 +1,84 @@
-<div class="container mt-5">
+<div class="container mt-4">
   <div class="row justify-content-center">
     <div class="col-md-4">
       <form (ngSubmit)="onSubmit()" [formGroup]="cursoForm">
+
         <div class="form-group">
           <label for="tema">Tema:</label>
-          <select id="tema" formControlName="tema" class="form-control">
+          <select
+            id="tema"
+            formControlName="tema"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': cursoForm.controls['tema'].touched && cursoForm.controls['tema'].invalid }"
+          >
+            <option value="">Seleccione un tema</option> <!-- Opción predeterminada vacía -->
             <option *ngFor="let tema of temas" [ngValue]="tema">{{ tema.nombre }}</option>
           </select>
           <div *ngIf="cursoForm.controls['tema'].touched && cursoForm.controls['tema'].invalid" class="text-danger">
             <small>El tema es requerido.</small>
           </div>
         </div>
+        
 
         <div class="form-group">
-          <label for="fechaInicio">Fecha de Inicio:</label>
-          <input id="fechaInicio" type="date" formControlName="fechaInicio" class="form-control" />
-          <div *ngIf="cursoForm.controls['fechaInicio'].touched && cursoForm.controls['fechaInicio'].invalid" class="text-danger">
-            <small>La fecha de inicio es requerida.</small>
+          <div class="col-md-4">
+            <label for="fechaInicio">Fecha de Inicio:</label>
+            <input id="fechaInicio" type="date" formControlName="fechaInicio" class="form-control"
+            [ngClass]="{ 'is-invalid': cursoForm.controls['fechaInicio'].touched && cursoForm.controls['fechaInicio'].invalid }"
+           />
+            <div *ngIf="cursoForm.controls['fechaInicio'].touched && cursoForm.controls['fechaInicio'].invalid" class="text-danger">
+              <small>La fecha de inicio es requerida.</small>
+            </div>
           </div>
         </div>
 
         <div class="form-group">
-          <label for="fechaFin">Fecha de Fin:</label>
-          <input id="fechaFin" type="date" formControlName="fechaFin" class="form-control" />
-          <div *ngIf="cursoForm.controls['fechaFin'].touched && cursoForm.controls['fechaFin'].invalid" class="text-danger">
-            <small>La fecha de fin es requerida.</small>
+          <div class="col-md-4">
+            <label for="fechaFin">Fecha de Fin:</label>
+            <input id="fechaFin" type="date" formControlName="fechaFin" class="form-control"
+            [ngClass]="{ 'is-invalid': cursoForm.controls['fechaFin'].touched && cursoForm.controls['fechaFin'].invalid }" />
+            <div *ngIf="cursoForm.controls['fechaFin'].touched && cursoForm.controls['fechaFin'].invalid" class="text-danger">
+              <small>La fecha de fin es requerida.</small>
+            </div>
           </div>
         </div>
 
         <div class="form-group">
           <label for="docente">Docente:</label>
-          <select id="docente" formControlName="docente" class="form-control">
+          <select id="docente" formControlName="docente" class="form-control" placeholder="Juan Rodriguez"
+          [ngClass]="{ 'is-invalid': cursoForm.controls['docente'].touched && cursoForm.controls['docente'].invalid }">
+            <option value="">Seleccione un Docente</option> <!-- Opción predeterminada vacía -->
             <option *ngFor="let docente of docentes" [ngValue]="docente">{{ docente.nombre }}</option>
           </select>
           <div *ngIf="cursoForm.controls['docente'].touched && cursoForm.controls['docente'].invalid" class="text-danger">
             <small>El docente es requerido.</small>
           </div>
+          
         </div>
 
         <div class="form-group">
-          <label for="precio">Precio:</label>
-          <input id="precio" type="number" formControlName="precio" class="form-control" />
-          <div *ngIf="cursoForm.controls['precio'].touched && cursoForm.controls['precio'].invalid" class="text-danger">
-            <small>El precio es requerido y debe ser mayor o igual a 0.</small>
+          <div class="col-md-4">
+            <label for="precio">Precio:</label>
+            <input id="precio" type="number" formControlName="precio" class="form-control" min="0" placeholder="100"
+             [ngClass]="{ 'is-invalid': cursoForm.controls['precio'].touched && cursoForm.controls['precio'].invalid }" />
+            <div *ngIf="cursoForm.controls['precio'].touched && cursoForm.controls['precio'].invalid" class="text-danger">
+              <small>El precio mayor igual a 0.</small>
+            </div>
           </div>
         </div>
 
         <div class="form-group">
           <label for="alumnos">Alumnos:</label>
-          <select id="alumnos" formControlName="alumnos" multiple class="form-control">
+          <select id="alumnos" formControlName="alumnos" multiple class="form-control" 
+          [ngClass]="{ 'is-invalid': cursoForm.controls['alumnos'].touched && cursoForm.controls['alumnos'].invalid }">
             <option *ngFor="let alumno of alumnos" [value]="alumno.id">{{ alumno.nombre }}</option>
           </select>
           <small class="form-text text-muted">Ctrl + Click para seleccionar múltiples alumnos</small>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+        <div class="text-center mt-4">
+          <button type="submit" [ngClass]="{'btn-secondary': cursoForm.invalid, 'btn-primary': cursoForm}" class="btn">Guardar</button>
+        </div>
       </form>
     </div>
   </div>

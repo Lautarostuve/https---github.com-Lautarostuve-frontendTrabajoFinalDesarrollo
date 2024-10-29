@@ -1,27 +1,73 @@
 <div class="container">
-    <h2>Lista de Docentes</h2>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Legajo</th>
-          <th>Nombre</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let docente of docentes">
-          <td>{{ docente.legajo }}</td>
-          <td>{{ docente.nombre }}</td>
-          <td>
-            <button (click)="eliminarDocente(docente.legajo)" class="btn btn-danger">Eliminar</button>
-          </td>
-          <td>
-            <button (click)="navegarAFormularioEditar(docente.legajo)">Editar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <button (click)="navegarAFormularioAgregar()">Agregar Docente</button>
+  <h2>Lista de Docentes</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Legajo</th>
+        <th>Nombre</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let docente of docentes">
+        <td>{{ docente.legajo }}</td>
+        <td>{{ docente.nombre }}</td>
+        <td>
+          <button (click)="eliminarDocente(docente.legajo)" class="btn btn-danger">Eliminar</button>
+          <button (click)="navegarAFormularioEditar(docente.legajo)" class="btn btn-primary">Editar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button (click)="navegarAFormularioAgregar()" class="btn btn-primary">Agregar Docente</button>
 
+  <!-- Formulario de búsqueda de alumnos por legajo de docente -->
+  <h3>Buscar Alumnos por Legajo de Docente</h3>
+  <form (ngSubmit)="buscarAlumnosPorDocente()" #docenteForm="ngForm">
+    <div class="form-group">
+      <label for="legajoDocente">Legajo del Docente</label>
+      <div class="col-md-1">
+        <input 
+          type="number" 
+          id="legajoDocente" 
+          [(ngModel)]="legajoDocente" 
+          name="legajoDocente" 
+          class="form-control" 
+          placeholder="100" 
+          min="0" 
+          required 
+          #legajoDocenteField="ngModel"
+        />
+        <!-- Mensaje de error si el valor es menor al mínimo permitido -->
+        <small 
+          class="text-danger" 
+          *ngIf="legajoDocenteField.errors?.['min'] && legajoDocenteField.touched">
+          El legajo no puede ser menor a 0.
+        </small>
+        <small 
+          class="text-danger" 
+          *ngIf="legajoDocenteField.errors?.['required'] && legajoDocenteField.touched">
+          El legajo es requerido.
+        </small>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2" [disabled]="docenteForm.invalid">Buscar</button>
+  </form>
+
+
+
+  <!-- Lista de alumnos -->
+  <div *ngIf="alumnos.length > 0">
+    <h3>Alumnos del Docente</h3>
+    <ul>
+      <li *ngFor="let alumno of alumnos">{{ alumno }}</li>
+    </ul>
   </div>
+
+    <!-- Mensaje alternativo si no hay alumnos -->
+  <ng-template #noAlumnos>
+    <p>No hay alumnos asignados a este docente.</p>
+  </ng-template>
+</div>
+
   

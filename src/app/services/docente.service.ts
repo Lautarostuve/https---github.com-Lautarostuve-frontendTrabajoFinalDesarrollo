@@ -35,4 +35,8 @@ export class DocenteService {
   eliminarDocente(id: number): Observable<Object> {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
+
+  obtenerAlumnosPorDocente(legajo: number): Observable<string[]> {
+    return this.http.get<string[]>(`http://localhost:8080/cursos/profesor/${legajo}/alumnos`);
+  }
 }

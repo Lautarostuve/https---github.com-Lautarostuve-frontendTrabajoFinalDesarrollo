@@ -27,8 +27,8 @@ export class CursoService {
   }
   
   //Obtener los cursos vigentes de un profesor:
-  obtenerCursosVigentesPorProfesor(fechaFin: string,legajo: number): Observable<Curso>{
-    return this.http.get<Curso>(`${this.baseUrl}/profesor/${fechaFin}/${legajo}`)
+  obtenerCursosVigentesPorProfesor(fechaFin: string,legajo: number): Observable<Curso[]>{
+    return this.http.get<Curso[]>(`${this.baseUrl}/profesor/${fechaFin}/${legajo}`)
   }
 
   // Crear un nuevo curso, en el back hay un endpoint POST/cursos que recibe un curso en el cuerpo de la solicitud

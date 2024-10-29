@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class TemaListComponent implements OnInit {
 
   temas?: Tema[];
+  mensajeError: string = ''; // Variable para almacenar el mensaje de error
 
   constructor(private temaService: TemaService,private router: Router) { }
 
@@ -36,9 +37,11 @@ export class TemaListComponent implements OnInit {
       },
       error => {
         if (error.status === 500) {
-          console.log('No fue posible eliminar el tema porque está asignado a un curso.')     
+          console.log('No fue posible eliminar el tema porque está asignado a un curso.');
+          this.mensajeError= "No fue posible eliminar el tema porque está asignado a un curso."
         } else {
           console.log('Error al intentar eliminar el tema.')
+          this.mensajeError= "Error al intentar eliminar el tema."
       }
     });
   }

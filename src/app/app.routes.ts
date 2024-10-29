@@ -23,4 +23,5 @@ export const routes: Routes = [
   { path: 'cursos', component: CursoListComponent},
   { path: 'agregar-curso', component: CursoFormComponent },
   { path: 'editar-curso/:id', component: CursoFormComponent },
+  { path: '', redirectTo: '/cursos', pathMatch: 'full' },
 ];

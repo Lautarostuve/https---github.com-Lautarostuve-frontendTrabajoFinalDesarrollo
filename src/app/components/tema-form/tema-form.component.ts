@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TemaService } from '../../services/tema.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule} from '@angular/common';
@@ -30,6 +30,10 @@ export class TemaFormComponent {
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
+    this.temaForm = this.fb.group({
+      nombre: ['', [Validators.required, Validators.maxLength(50)]],
+      descripcion: ['', [Validators.required, Validators.maxLength(50)]]
+    });
     
     if (id) {
       this.temaService.obtenerTemaPorId(id).subscribe(data => {

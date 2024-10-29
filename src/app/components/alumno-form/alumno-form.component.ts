@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { AlumnoService } from '../../services/alumno.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule} from '@angular/common';
@@ -15,6 +15,7 @@ import { Alumno } from '../../model/alumno.model';
 export class AlumnoFormComponent {
 
   alumnoForm: FormGroup;
+  maxDate: string = '';
 
   constructor(
     private alumnoService: AlumnoService,
@@ -24,12 +25,15 @@ export class AlumnoFormComponent {
   ) {
     this.alumnoForm = this.fb.group({
       nombre: [''],
-      fechaNacimiento: ['']
+      fechaNacimiento: ['', [Validators.required, this.maxDateValidator.bind(this)]]
     });
   }
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
+    this.setMaxDate();
+
+    
     
     if (id) {
       this.alumnoService.obtenerAlumnoPorId(id).subscribe(data => {
@@ -61,16 +65,20 @@ export class AlumnoFormComponent {
     }
   }
   
-  
-
-  
-  formatDate(fecha: Date): string {
-    const date = new Date(fecha);
-    const year = date.getFullYear();
-    const month = ('0' + (date.getMonth() + 1)).slice(-2); // Añade el 0 si es necesario
-    const day = ('0' + date.getDate()).slice(-2);
-    return `${year}-${month}-${day}`; // Retorna en formato YYYY-MM-DD
+  //Setea la fecha maxima al dia actual.
+  private setMaxDate() {
+    const today = new Date();
+    this.maxDate = today.toISOString().split('T')[0];
   }
+  
+  // Validador personalizado para la fecha de nacimiento
+  private maxDateValidator(control: AbstractControl): ValidationErrors | null {
+    if (control.value && control.value > this.maxDate) {
+      return { maxDate: true };
+    }
+    return null;
+  }
+  
   
   
 }
