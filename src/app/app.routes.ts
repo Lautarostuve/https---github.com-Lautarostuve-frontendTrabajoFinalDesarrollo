@@ -8,6 +8,7 @@ import { DocenteFormComponent } from './components/docente-form/docente-form.com
 import { CursoFormComponent } from './components/curso-form/curso-form.component';
 import { CursoListComponent } from './components/curso-list/curso-list.component';
 import { CentralComponent } from './central/central.component';
+import { HomeComponent } from './components/home/home.component';
 
 
 export const routes: Routes = [
@@ -23,5 +24,6 @@ export const routes: Routes = [
   { path: 'cursos', component: CursoListComponent},
   { path: 'agregar-curso', component: CursoFormComponent },
   { path: 'editar-curso/:id', component: CursoFormComponent },
+  { path: 'home', component: HomeComponent },
   { path: '', redirectTo: '/cursos', pathMatch: 'full' },
 ];

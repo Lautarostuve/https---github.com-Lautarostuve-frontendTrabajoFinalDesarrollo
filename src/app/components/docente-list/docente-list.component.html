@@ -19,7 +19,12 @@
       </tr>
     </tbody>
   </table>
+  <div *ngIf="mensajeError" class="alert alert-danger">
+    {{ mensajeError }}
+  </div>
+  <div></div>
   <button (click)="navegarAFormularioAgregar()" class="btn btn-primary">Agregar Docente</button>
+  
 
   <!-- Formulario de búsqueda de alumnos por legajo de docente -->
   <h3>Buscar Alumnos por Legajo de Docente</h3>
@@ -34,22 +39,23 @@
           name="legajoDocente" 
           class="form-control" 
           placeholder="100" 
-          min="0" 
+          min="0"
           required 
           #legajoDocenteField="ngModel"
         />
+        </div>
         <!-- Mensaje de error si el valor es menor al mínimo permitido -->
-        <small 
-          class="text-danger" 
-          *ngIf="legajoDocenteField.errors?.['min'] && legajoDocenteField.touched">
-          El legajo no puede ser menor a 0.
-        </small>
-        <small 
-          class="text-danger" 
-          *ngIf="legajoDocenteField.errors?.['required'] && legajoDocenteField.touched">
-          El legajo es requerido.
-        </small>
-      </div>
+      <small 
+        class="text-danger" 
+        *ngIf="legajoDocenteField.errors?.['min'] && legajoDocenteField.touched">
+        El legajo no puede ser menor a 0.
+      </small>
+      <small 
+        class="text-danger" 
+        *ngIf="legajoDocenteField.errors?.['required'] && legajoDocenteField.touched">
+        El legajo es requerido.
+      </small>
+      
     </div>
     <button type="submit" class="btn btn-primary mt-2" [disabled]="docenteForm.invalid">Buscar</button>
   </form>
@@ -64,10 +70,10 @@
     </ul>
   </div>
 
-    <!-- Mensaje alternativo si no hay alumnos -->
-  <ng-template #noAlumnos>
-    <p>No hay alumnos asignados a este docente.</p>
-  </ng-template>
-</div>
+
+  <!--Si no hay alumnos -->
+  <div *ngIf="alumnos.length <= 0">
+      <p>No hay alumnos asignados a este docente o no existe docente con ese legajo.</p>
+  </div>
 
   

@@ -63,11 +63,12 @@
           min = "0"
           required
         >
-        <!-- Mensaje de error si el número es negativo -->
-        <div class="text-danger" *ngIf="buscarForm.get('legajo')?.hasError('min') && buscarForm.get('legajo')?.touched">
-          El legajo no puede ser negativo.
-        </div>
       </div>
+        <!-- Mensaje de error si el número es negativo -->
+      <div class="text-danger" *ngIf="buscarForm.get('legajo')?.hasError('min') && buscarForm.get('legajo')?.touched">
+        El legajo no puede ser negativo.
+      </div>
+      
 
       <!-- Campo Fecha -->
       <div class="col-md-2">

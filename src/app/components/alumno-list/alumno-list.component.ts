@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class AlumnoListComponent implements OnInit {
 
   alumnos?: Alumno[];
+  mensajeError: string = ''; // Variable para almacenar el mensaje de error
 
   constructor(private alumnoService: AlumnoService,private router: Router) { }
 
@@ -33,12 +34,15 @@ export class AlumnoListComponent implements OnInit {
       () => {
       console.log('Alumno eliminado con éxito');
       this.obtenerTodosLosAlumnos(); // Recargar la lista después de eliminar
+      this.mensajeError = '';
       },
       error => {
         if (error.status === 500) {
-          console.log('No fue posible eliminar el alumno porque está asignado a un curso.')     
+          console.log('No fue posible eliminar el alumno porque está asignado a un curso.')
+          this.mensajeError = 'No fue posible eliminar el alumno porque está asignado a un curso.';
         } else {
           console.log('Error al intentar eliminar el alumno.')
+          this.mensajeError = 'Error al intentar eliminar el alumno.'
       }
     });
   }

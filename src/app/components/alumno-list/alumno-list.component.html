@@ -21,6 +21,9 @@
         </tr>
       </tbody>
     </table>
+    <div *ngIf="mensajeError" class="alert alert-danger">
+      {{ mensajeError }}
+    </div>
     <button (click)="navegarAFormularioAgregar()" class="btn btn-primary">Agregar Alumno</button>
 
   </div>
