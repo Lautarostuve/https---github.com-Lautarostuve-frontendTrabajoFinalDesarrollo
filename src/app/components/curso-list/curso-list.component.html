@@ -3,6 +3,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
+        <!-- Encabezado de la tabla para cada propiedad del curso -->
         <th>ID</th>
         <th>Tema</th>
         <th>Fecha de inicio</th>
@@ -22,12 +23,13 @@
         <td>{{ curso.docente.nombre }}</td>
         <td>{{ curso.precio }}</td>
         <td>
-          <ul><!-- Mostrar solo 2 alumnos, si no esta mostrarTodo -->
+          <ul><!-- Lista de alumnos, limitando la visualización a 2 elementos a menos que 'mostrarTodo[i]' esté en true -->
             <li *ngFor="let alumno of curso.alumnos.slice(0, mostrarTodo[i] ? curso.alumnos.length : 2)">
               {{ alumno.nombre }}
             </li>
           </ul>
           <!-- Mostrar el botón 'Ver más' solo si hay más de 2 alumnos -->
+          <!-- Botón 'Ver más' solo aparece si hay más de 2 alumnos y mostrarTodo[i] es false -->
           <button *ngIf="curso.alumnos.length > 2 && !mostrarTodo[i]" (click)="verMas(i)" class="btn btn-link">Ver más</button>
           <button *ngIf="mostrarTodo[i]" (click)="verMenos(i)" class="btn btn-link">Ver menos</button>
         </td>
@@ -40,6 +42,7 @@
   </table>
   <button (click)="navegarAFormularioAgregar()" class="btn btn-primary">Agregar Curso</button>
   <!-- Botón para volver a mostrar todos los cursos -->
+  <!-- Botón para recargar la lista de cursos; usa ngClass para cambiar el estilo del botón según si la búsqueda fue realizada -->
   <button (click)="obtenerTodosLosCursos()" [ngClass]="{'btn-secondary': !busquedaRealizada, 'btn-primary': busquedaRealizada}" class="btn">Mostrar todos los Cursos</button>
   
 </div>

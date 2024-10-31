@@ -35,8 +35,8 @@ export class CursoListComponent implements OnInit { //define el componente Curso
   }
 
   obtenerTodosLosCursos() {
-      this.cursoService.obtenerTodosLosCursos().subscribe(data => { //
-      this.cursos = data;
+      this.cursoService.obtenerTodosLosCursos().subscribe(data => { //se suscribe al observable obtenerTodosLosCursos(), que obtiene datos de los cursos. Cuando los datos llegan, son pasados a la función donde se asignan a this.cursos.
+      this.cursos = data; //No puedo asignar directamente el resultado de obtenerTodosLosCursos, ya que es un observable, debo hacer el suscribe
       this.mostrarTodo = new Array(this.cursos.length).fill(false); //es un array que en cada posicion tiene un true o false, indicando si se presiono en ver mas o no en cada curso
       this.busquedaRealizada = false; //para ver si se realizo una busqueda y desbloquear el boton de mostrar todos los cursos
     });
@@ -83,7 +83,7 @@ export class CursoListComponent implements OnInit { //define el componente Curso
       const fecha = this.buscarForm.value.fecha;
       
       this.cursoService.obtenerCursosVigentesPorProfesor(fecha,legajo).subscribe(
-        (cursos: Curso[]) => {
+        (cursos: Curso[]) => { //podria haber puesto data
           this.cursos = cursos;  // Actualizar la lista de cursos con los resultados de la búsqueda
           this.busquedaRealizada = true;
         },

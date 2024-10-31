@@ -51,8 +51,8 @@ export class CursoFormComponent implements OnInit {
     this.cargarDocentes();
     this.cargarAlumnos();
 
-    // Si hay un ID en la ruta, significa que es una edición
-    const id = this.route.snapshot.params['id'];
+    // Si hay un ID en la ruta, significa que es una edicion
+    const id = this.route.snapshot.params['id']; //.params['id'] recupera el valor del parametro id de la ruta 
     if (id) {
       this.cargarCurso(id);
     }
@@ -95,7 +95,7 @@ export class CursoFormComponent implements OnInit {
         ...this.cursoForm.value,
         // No es necesario buscar el tema y el docente de nuevo, ya que el formulario debe contener el objeto completo
         alumnos: this.alumnos.filter(a => this.cursoForm.value.alumnos.includes(a.id))
-          .map(alumno => ({ id: alumno.id, nombre: alumno.nombre })) // Asegúrate de enviar el objeto completo
+          .map(alumno => ({ id: alumno.id, nombre: alumno.nombre })) 
       };
   
       const id = this.route.snapshot.params['id'];
