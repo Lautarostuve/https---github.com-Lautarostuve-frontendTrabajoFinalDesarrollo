@@ -3,16 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Curso } from '../model/curso.model';
 //Este archivo hara las solicitudes crud al back
-@Injectable({
-  providedIn: 'root'
+@Injectable({  //le indica a Angular que puede instanciar esta clase e inyectarla en otros componentes
+  providedIn: 'root' // Hace que el servicio esté disponible en toda la app
 })
 export class CursoService {
-  private baseUrl = 'http://localhost:8080/cursos'; // Asegúrate de que coincida con tu backend
+  private baseUrl = 'http://localhost:8080/cursos'; 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { } //HttpClient es una clase que provee Angular para realizar solicitudes HTTP
 
   // Obtener todos los cursos
-  obtenerTodosLosCursos(): Observable<Curso[]> {
+  obtenerTodosLosCursos(): Observable<Curso[]> { //Observable permite retornar datos que pueden ser observados o suscritos en componentes
     return this.http.get<Curso[]>(`${this.baseUrl}`);
   }
 

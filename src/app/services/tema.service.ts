@@ -7,7 +7,7 @@ import { Tema } from '../model/tema.model';
   providedIn: 'root'
 })
 export class TemaService {
-  private baseUrl = 'http://localhost:8080/temas/'; // Asegúrate de que coincida con tu backend
+  private baseUrl = 'http://localhost:8080/temas/'; 
 
   constructor(private http: HttpClient) { }
 

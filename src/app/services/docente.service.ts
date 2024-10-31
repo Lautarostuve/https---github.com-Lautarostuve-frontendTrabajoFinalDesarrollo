@@ -7,7 +7,7 @@ import { Docente } from '../model/docente.model';
   providedIn: 'root'
 })
 export class DocenteService {
-  private baseUrl = 'http://localhost:8080/docentes'; // Asegúrate de que coincida con tu backend
+  private baseUrl = 'http://localhost:8080/docentes'; 
 
   constructor(private http: HttpClient) { }
 

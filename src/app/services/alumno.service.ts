@@ -7,7 +7,7 @@ import { Alumno } from '../model/alumno.model';
   providedIn: 'root'
 })
 export class AlumnoService {
-  private baseUrl = 'http://localhost:8080/alumnos'; // Asegúrate de que coincida con tu backend
+  private baseUrl = 'http://localhost:8080/alumnos'; 
 
   constructor(private http: HttpClient) { }
 

@@ -3,7 +3,7 @@ export class Alumno {
     nombre!: string;
     fechaNacimiento!: string;
     
-    constructor(nombre: string = '', fechaNacimiento: '' ) {
+    constructor(nombre: string = '', fechaNacimiento: '' ) { //el id es autoincrementable
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
       }

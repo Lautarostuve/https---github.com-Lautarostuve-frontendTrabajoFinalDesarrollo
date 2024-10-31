@@ -12,13 +12,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
   styleUrls: ['./curso-list.component.css'],
   imports: [CommonModule,ReactiveFormsModule]
 })
-export class CursoListComponent implements OnInit {
+export class CursoListComponent implements OnInit { //define el componente CursoList, que sera la lista de cursos. Se puede exportar, como en app.routes
 
-  cursos: Curso[] = []; 
+  cursos: Curso[] = []; //contiene la lista de cursos del back, se llena cuando se hace el ngOnInit y la funcion obtenerTodosLosCursos
   mostrarTodo: boolean[] = [];
 
   // Formulario para buscar por profesor y fecha
-  buscarForm!: FormGroup;
+  buscarForm!: FormGroup; 
   busquedaRealizada: boolean = false; 
   
   constructor(private cursoService: CursoService,private router: Router, private fb: FormBuilder) { }
@@ -26,19 +26,19 @@ export class CursoListComponent implements OnInit {
   ngOnInit(): void {
     this.obtenerTodosLosCursos();
 
-    // Inicializar el formulario
+    // Inicializar el formulario para buscar por profesor y fecha
     this.buscarForm = this.fb.group({
-      legajo: ['', [Validators.required]],  // Campo para legajo del profesor
+      legajo: ['', [Validators.required]],  // Campo para legajo del profesor, validators indica que es requerido si o si para hacer la busqueda, si no es invalido
       fecha: ['', [Validators.required]]    // Campo para la fecha
       
     });
   }
 
   obtenerTodosLosCursos() {
-      this.cursoService.obtenerTodosLosCursos().subscribe(data => {
+      this.cursoService.obtenerTodosLosCursos().subscribe(data => { //
       this.cursos = data;
-      this.mostrarTodo = new Array(this.cursos.length).fill(false);
-      this.busquedaRealizada = false;
+      this.mostrarTodo = new Array(this.cursos.length).fill(false); //es un array que en cada posicion tiene un true o false, indicando si se presiono en ver mas o no en cada curso
+      this.busquedaRealizada = false; //para ver si se realizo una busqueda y desbloquear el boton de mostrar todos los cursos
     });
   }
   // Mostrar todos los alumnos del curso seleccionado
