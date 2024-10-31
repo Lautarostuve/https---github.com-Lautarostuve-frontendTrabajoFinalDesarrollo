@@ -1,0 +1,33 @@
+/* Personalización del encabezado */
+
+.custom-header {
+    background: linear-gradient(135deg, #122a4a, #051e3f);
+    color: #ffffff;
+    padding: 2.5rem 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .custom-header h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  
+  .lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: #f0f8ff;
+    margin-bottom: 1.5rem;
+  }
+  
+ .btn {
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    font-weight: 500;
+    transition: all 0.8s ease;
+  }
+  
+  .btn:hover {
+    background-color: #ffffff;
+    color: #488de7;
+  }

@@ -1,12 +1,15 @@
- <!-- Encabezado principal -->
-<header class="bg-primary text-white text-center py-5">
-    <div class="container">
-      <h1>Trabajo Practico Final</h1>
-      <a class="nav-link" [routerLink]="['/cursos']" class="btn btn-light btn-lg mt-3"> Cursos </a>
-      <a class="nav-link" [routerLink]="['/temas']" class="btn btn-dark btn-lg mt-3"> Temas </a>
-      <a class="nav-link" [routerLink]="['/alumnos']" class="btn btn-dark btn-lg mt-3"> Alumnos </a>
-      <a class="nav-link" [routerLink]="['/docentes']" class="btn btn-dark btn-lg mt-3"> Docentes </a>
+<!-- Encabezado principal -->
+<header class="custom-header text-center py-5">
+  <div class="container">
+    <h1 class="display-4">Trabajo Práctico Final</h1>
+    <p class="lead">Gestión de Cursos, Temas, Alumnos y Docentes</p>
+    <div class="btn-group mt-4">
+      <a [routerLink]="['/cursos']" class="btn btn-outline-light btn-lg mx-2">Cursos</a>
+      <a [routerLink]="['/temas']" class="btn btn-outline-light btn-lg mx-2">Temas</a>
+      <a [routerLink]="['/alumnos']" class="btn btn-outline-light btn-lg mx-2">Alumnos</a>
+      <a [routerLink]="['/docentes']" class="btn btn-outline-light btn-lg mx-2">Docentes</a>
     </div>
+  </div>
 </header>
 
 
