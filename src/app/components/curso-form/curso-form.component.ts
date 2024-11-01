@@ -92,20 +92,21 @@ export class CursoFormComponent implements OnInit {
   onSubmit(): void {
     if (this.cursoForm.valid) {
       const curso: Curso = {
-        ...this.cursoForm.value,
+        ...this.cursoForm.value, //copia todas las propiedades de cursoForm en el nuevo objeto curso.
+        //Crea una copia de los datos del formulario en un nuevo objeto curso.
         // No es necesario buscar el tema y el docente de nuevo, ya que el formulario debe contener el objeto completo
         alumnos: this.alumnos.filter(a => this.cursoForm.value.alumnos.includes(a.id))
-          .map(alumno => ({ id: alumno.id, nombre: alumno.nombre })) 
+          .map(alumno => ({ id: alumno.id, nombre: alumno.nombre }))  //se extrae solo el id y nombre de cada alumno, no hace falta mandar el alumno completo
       };
   
       const id = this.route.snapshot.params['id'];
       if (id) {
-        this.cursoService.actualizarCurso(id, curso).subscribe(() => {
+        this.cursoService.actualizarCurso(id, curso).subscribe(() => { //envia el curso actualizado al back, si la ruta tenia un id
           console.log('Curso actualizado con éxito');
           this.router.navigate(['/cursos']);
         });
       } else {
-        this.cursoService.guardarCurso(curso).subscribe(() => {
+        this.cursoService.guardarCurso(curso).subscribe(() => {//envia el curso nuevo al back, si la ruta no tenia un id
           console.log('Curso creado con éxito');
           this.router.navigate(['/cursos']);
         });
