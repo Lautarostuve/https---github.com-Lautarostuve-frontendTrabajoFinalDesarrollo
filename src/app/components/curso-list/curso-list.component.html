@@ -76,8 +76,12 @@
       <!-- Campo Fecha -->
       <div class="col-md-2">
         <label for="fecha">Fecha</label>
-        <input type="date" id="fecha" class="form-control" formControlName="fecha" required>
+        <input type="date" id="fecha" class="form-control" formControlName="fecha" required
+        [ngClass]="{ 'is-invalid': buscarForm.controls['fecha'].touched && buscarForm.controls['fecha'].invalid }" />
       </div>
+      <small class="text-danger" *ngIf="buscarForm.get('fecha')?.hasError('required') && buscarForm.get('fecha')?.touched">
+        La fecha es requerida.
+      </small>
 
       <!-- Botón de búsqueda -->
       <div class="col-md-auto">
